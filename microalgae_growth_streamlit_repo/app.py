@@ -41,8 +41,7 @@ with st.sidebar:
     else:
         st.info("Backend: SQLite (local) / 本地数据库: data/microalgae.db")
 
-    if st.button("Initialize / Create Tables
-初始化/建表", type="primary"):
+if st.button("Initialize / Create Tables\n初始化/建表", type="primary"):
         init_db(engine)
         st.toast("Database initialized / 已建表", icon="✅")
 
