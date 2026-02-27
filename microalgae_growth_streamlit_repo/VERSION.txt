@@ -1,0 +1,1 @@
+v4 - import NaN-safe + avoid SQLite lock via single-connection FK resolving
