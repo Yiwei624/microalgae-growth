@@ -32,21 +32,22 @@ st.markdown(
 """
 )
 
-with st.sidebar:
-    st.header("Database / 数据库")
-    using_url = os.environ.get("DATABASE_URL", "").strip()
-    if using_url:
-        st.success("Backend: Postgres / 远程数据库")
-        st.code(using_url[:120] + ("..." if len(using_url) > 120 else ""))
-    else:
-        st.info("Backend: SQLite (local) / 本地数据库: data/microalgae.db")
 
-if st.button("Initialize / Create Tables\n初始化/建表", type="primary"):
-        init_db(engine)
-        st.toast("Database initialized / 已建表", icon="✅")
+# ---------------- Sidebar (no 'with' block) ----------------
+st.sidebar.header("Database / 数据库")
+using_url = os.environ.get("DATABASE_URL", "").strip()
+if using_url:
+    st.sidebar.success("Backend: Postgres / 远程数据库")
+    st.sidebar.code(using_url[:120] + ("..." if len(using_url) > 120 else ""))
+else:
+    st.sidebar.info("Backend: SQLite (local) / 本地数据库: data/microalgae.db")
 
-    st.divider()
-    st.caption("Tip: For Streamlit Cloud persistence, use Postgres via `DATABASE_URL` in Secrets.")
+if st.sidebar.button("Initialize / Create Tables\n初始化/建表", type="primary"):
+    init_db(engine)
+    st.toast("Database initialized / 已建表", icon="✅")
+
+st.sidebar.divider()
+st.sidebar.caption("Tip: For Streamlit Cloud persistence, use Postgres via `DATABASE_URL` in Secrets.")
 
 tab_upload, tab_browse, tab_quality, tab_help = st.tabs([
     "Upload / Update 上传更新", "Browse 浏览", "Quality 质控", "Help 帮助"
